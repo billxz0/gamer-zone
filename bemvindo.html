@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GAMER ZONE · Boas-vindas</title>
+<style>
+  :root{--bg:#0a0612;--purple:#a855f7;--purple2:#7c3aed;--neon:#c084fc;--text:#e9dcff;--dim:#a893cc}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:radial-gradient(circle at 50% 30%,#1e0f38 0%,#0a0612 75%);color:var(--text);
+    font-family:'Segoe UI',Arial,sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;overflow-x:hidden}
+  .onda{position:fixed;width:1100px;height:1100px;border-radius:50%;border:1px solid rgba(168,85,247,.3);animation:onda 2.8s ease-out infinite;pointer-events:none}
+  .onda:nth-child(2){animation-delay:1s}.onda:nth-child(3){animation-delay:2s}
+  @keyframes onda{from{transform:scale(.2);opacity:.9}to{transform:scale(1.05);opacity:0}}
+  .card{position:relative;text-align:center;max-width:620px}
+  .gtop{width:270px;max-width:70vw;border-radius:18px;border:2px solid var(--purple);box-shadow:0 0 40px rgba(168,85,247,.65);
+    margin:0 auto 18px;display:block;animation:coroa 1.1s ease-out}
+  .choroa{width:120px;height:120px;margin:0 auto;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:56px;
+    border:2px solid var(--purple);box-shadow:0 0 42px rgba(168,85,247,.65),inset 0 0 24px rgba(168,85,247,.35);
+    animation:coroa 1s ease-out}
+  @keyframes coroa{0%{transform:translateY(-70px) scale(.4);opacity:0}60%{transform:translateY(8px) scale(1.12)}100%{transform:scale(1)}}
+  .vr{color:var(--neon);font-size:12px;letter-spacing:6px;margin-top:26px;opacity:0;animation:sb .8s .6s forwards}
+  .t1{font-size:clamp(32px,7vw,58px);font-weight:800;letter-spacing:5px;margin-top:8px;opacity:0;animation:sb .9s 1s forwards;
+    background:linear-gradient(180deg,#fff 15%,var(--purple) 88%);-webkit-background-clip:text;background-clip:text;color:transparent;
+    filter:drop-shadow(0 0 18px rgba(168,85,247,.5))}
+  .nick{font-size:clamp(22px,5vw,34px);font-weight:800;color:#fff;margin-top:14px;opacity:0;animation:sb .9s 1.7s forwards;
+    text-shadow:0 0 22px var(--purple)}
+  .nick::before,.nick::after{content:' ★';color:var(--neon);font-size:20px}
+  .nick::after{content:'★ ';display:inline-block}
+  @keyframes sb{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+  .msg{color:var(--dim);line-height:1.9;font-size:15px;margin-top:22px;opacity:0;animation:sb .9s 2.4s forwards;max-width:520px;margin-left:auto;margin-right:auto}
+  .msg b{color:var(--neon)}
+  .zona{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:26px;opacity:0;animation:sb .9s 3s forwards}
+  .z{background:#140a24dd;border:1px solid rgba(168,85,247,.4);border-radius:12px;padding:14px 20px;font-size:13px;color:var(--text)}
+  .z i{display:block;font-style:normal;font-size:22px;margin-bottom:6px;filter:drop-shadow(0 0 8px var(--purple))}
+  .fim{margin-top:30px;border:1px solid rgba(168,85,247,.5);color:var(--neon);font-size:11px;letter-spacing:3px;padding:9px 24px;
+    border-radius:99px;opacity:0;animation:sb .9s 3.6s forwards}
+</style>
+</head>
+<body>
+<div class="onda"></div><div class="onda"></div><div class="onda"></div>
+<div class="card">
+  <img class="gtop" src="usuario.gif" alt="">
+  <div class="choroa">👑</div>
+  <div class="vr">BOAS-VINDAS · GAMER ZONE</div>
+  <div class="t1">SEJA BEM-VINDO</div>
+  <div class="nick" id="nk">JOGADOR</div>
+  <p class="msg">Sua verificação foi <b>aprovada com sucesso</b> e tu agora faz parte da família.<br><br>
+  Território liberado: agora é <b>jogar, viver boas partidas e se divertir</b> do teu jeito.<br>
+  Prepare o equipmento — a zona é toda tua. 🎮🔥</p>
+  <div class="zona">
+    <div class="z"><i>🎮</i>Zona de jogo</div>
+    <div class="z"><i>🎙️</i>Calls liberadas</div>
+    <div class="z"><i>🎵</i>Música no clima</div>
+    <div class="z"><i>🏆</i>Destaques e records</div>
+  </div>
+  <div class="fim">A EQUIPE TE RECEBE DE PORTÕES ABERTOS · BONS JOGOS</div>
+</div>
+<script>
+  const nick = new URLSearchParams(location.search).get('n');
+  if (nick) document.getElementById('nk').textContent = decodeURIComponent(nick).slice(0, 24).toUpperCase();
+</script>
+</body>
+</html>
+

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GAMER ZONE · Regulamento Oficial</title>
+<style>
+  :root{--bg:#0a0612;--panel:#160d26;--panel2:#1d1133;--purple:#a855f7;--purple2:#7c3aed;--neon:#c084fc;--text:#e9dcff;--dim:#a893cc;--red:#f43f5e;--gold:#ffcc00}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--text);font-family:'Segoe UI',Arial,sans-serif;min-height:100vh}
+  .glow{position:fixed;width:520px;height:520px;border-radius:50%;filter:blur(120px);opacity:.28;pointer-events:none;z-index:0}
+  .g1{background:var(--purple2);top:-160px;left:-140px}.g2{background:#d946ef;bottom:-200px;right:-150px}
+
+  /* ══ CAPA DE SEGURANÇA ══ */
+  #acesso{position:fixed;inset:0;z-index:100;background:radial-gradient(circle at 50% 42%,#1e0f38 0%,#0a0612 72%);
+    display:flex;align-items:center;justify-content:center;padding:20px;transition:opacity .7s,visibility .7s}
+  #acesso.off{opacity:0;visibility:hidden}
+  .caixa{background:#140a24cc;border:1px solid rgba(168,85,247,.45);border-radius:18px;padding:38px 30px;max-width:430px;width:100%;
+    text-align:center;box-shadow:0 0 35px rgba(124,58,237,.4);backdrop-filter:blur(8px)}
+  .coroaG{font-size:52px;filter:drop-shadow(0 0 16px var(--purple))}
+  h1{font-size:26px;font-weight:800;letter-spacing:5px;margin:14px 0 6px;
+    background:linear-gradient(180deg,#fff 15%,var(--purple) 90%);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .subA{color:var(--dim);font-size:14px;line-height:1.7;margin-bottom:26px}
+  .l-c{display:flex;align-items:center;gap:12px;cursor:pointer;user-select:none;background:#0f0a1a;border:1px solid rgba(168,85,247,.35);
+    border-radius:10px;padding:14px 16px}
+  .l-c:hover{border-color:var(--neon)}
+  .q{width:24px;height:24px;border-radius:6px;border:2px solid var(--neon);display:flex;align-items:center;justify-content:center;
+    font-size:14px;color:transparent;transition:.2s;flex-shrink:0}
+  .l-c.ok .q{background:var(--purple);border-color:var(--purple);color:#fff;box-shadow:0 0 10px var(--purple)}
+  .l-c span{font-size:13px}
+  .mat{font-size:14px;color:var(--dim);margin:16px 0 4px}
+  .mat b{color:var(--neon);font-size:17px}
+  .inp{background:#0f0a1a;border:1px solid var(--neon);color:#fff;font-size:17px;text-align:center;border-radius:8px;
+    padding:9px;width:120px;outline:none;margin-top:6px}
+  .btn{width:100%;margin-top:18px;border:none;padding:14px;border-radius:10px;font-weight:700;letter-spacing:1px;color:#fff;cursor:pointer;
+    background:linear-gradient(135deg,var(--purple2),var(--purple));opacity:.45;pointer-events:none;transition:.25s;font-size:14px}
+  .btn.on{opacity:1;pointer-events:auto}
+  .btn.on:hover{transform:translateY(-2px);box-shadow:0 0 24px rgba(168,85,247,.75)}
+  .fal{color:var(--red);font-size:12px;margin-top:10px;min-height:16px}
+  .avan{font-size:11px;color:#6d5a91;margin-top:18px;letter-spacing:1px}
+  .spin{display:none;margin:16px auto 0;width:34px;height:34px;border:3px solid rgba(168,85,247,.25);border-top-color:var(--purple);
+    border-radius:50%;animation:giro 1s linear infinite}
+  .spin.on{display:block}
+  @keyframes giro{to{transform:rotate(360deg)}}
+
+  /* ══ APROVAÇÃO ══ */
+  #aprov{position:fixed;inset:0;z-index:99;background:radial-gradient(circle at 50% 45%,#2a1055 0%,#0a0612 78%);
+    display:none;flex-direction:column;align-items:center;justify-content:center;padding:20px;text-align:center}
+  #aprov.on{display:flex;animation:apIn .8s}
+  @keyframes apIn{from{opacity:0}to{opacity:1}}
+  .onda{position:absolute;width:1100px;height:1100px;border-radius:50%;border:1px solid rgba(168,85,247,.32);animation:onda 2.6s ease-out infinite}
+  .onda:nth-child(2){animation-delay:.9s}.onda:nth-child(3){animation-delay:1.8s}
+  @keyframes onda{from{transform:scale(.18);opacity:1}to{transform:scale(1.02);opacity:0}}
+  .chq{width:110px;height:110px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:56px;
+    border:2px solid var(--purple);box-shadow:0 0 45px rgba(168,85,247,.75),inset 0 0 26px rgba(168,85,247,.4);
+    animation:cair .8s ease-out}
+  @keyframes cair{0%{transform:translateY(-70px) scale(.4);opacity:0}60%{transform:translateY(8px) scale(1.1)}100%{transform:scale(1)}}
+  .tA{font-size:clamp(28px,6vw,52px);font-weight:800;letter-spacing:6px;margin-top:26px;opacity:0;animation:sb .8s .9s forwards;
+    background:linear-gradient(180deg,#fff 15%,var(--purple) 90%);-webkit-background-clip:text;background-clip:text;color:transparent}
+  @keyframes sb{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+  .pA{color:var(--dim);line-height:1.8;margin-top:18px;font-size:14px;max-width:520px;opacity:0;animation:sb .8s 1.6s forwards}
+  .pA b{color:var(--neon)}
+  .cA{margin-top:30px;border:1px solid rgba(168,85,247,.55);color:var(--neon);font-size:11px;letter-spacing:3px;padding:9px 24px;
+    border-radius:99px;opacity:0;animation:sb .8s 2.2s forwards}
+
+  /* ══ CONTEÚDO ══ */
+  .tudo{position:relative;z-index:1;display:block}
+  nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:14px 5%;
+    background:rgba(10,6,18,.88);backdrop-filter:blur(10px);border-bottom:1px solid rgba(168,85,247,.25)}
+  .logo{display:flex;align-items:center;gap:12px;font-weight:800}
+  .lc{font-size:24px;filter:drop-shadow(0 0 8px var(--purple))}
+  .lt{font-size:19px;letter-spacing:3px}.lt small{display:block;font-size:9px;letter-spacing:6px;color:var(--neon);text-align:center}
+  .saud{position:fixed;bottom:18px;right:22px;z-index:60;background:#140a24dd;border:1px solid rgba(168,85,247,.5);color:var(--neon);
+    padding:10px 18px;border-radius:99px;font-size:13px;letter-spacing:1px;box-shadow:0 0 18px rgba(124,58,237,.4)}
+  header{text-align:center;padding:80px 5% 60px}
+  .bdg{display:inline-block;border:1px solid rgba(168,85,247,.5);color:var(--neon);font-size:11px;letter-spacing:4px;
+    padding:7px 18px;border-radius:99px;margin-bottom:24px;background:rgba(124,58,237,.12)}
+  .hero{font-size:clamp(40px,7vw,78px);font-weight:800;letter-spacing:6px;
+    background:linear-gradient(180deg,#fff 15%,var(--purple) 88%);-webkit-background-clip:text;background-clip:text;color:transparent;
+    filter:drop-shadow(0 0 22px rgba(168,85,247,.5))}
+  .hsu{color:var(--dim);max-width:620px;margin:16px auto 0;line-height:1.75;font-size:14px}
+  section{max-width:1000px;margin:0 auto;padding:46px 5%}
+  .stag{color:var(--neon);font-size:11px;letter-spacing:5px;margin-bottom:8px}
+  h2{font-size:clamp(24px,4vw,34px);font-weight:800;margin-bottom:8px}
+  .sh p{color:var(--dim);line-height:1.7;font-size:14px}
+  .div{height:1px;background:linear-gradient(90deg,transparent,rgba(168,85,247,.55),transparent);margin:12px 0 30px}
+  .r{display:flex;gap:18px;padding:24px;border-radius:14px;margin-bottom:14px;
+    background:linear-gradient(160deg,var(--panel),var(--panel2));border:1px solid rgba(168,85,247,.22);transition:.25s}
+  .r:hover{border-color:rgba(168,85,247,.6);transform:translateX(6px)}
+  .rn{min-width:46px;height:46px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px;
+    background:linear-gradient(135deg,var(--purple2),var(--purple));box-shadow:0 0 14px rgba(168,85,247,.45)}
+  .r.ariesg .rn{background:linear-gradient(135deg,#9f1239,var(--red));box-shadow:0 0 14px rgba(244,63,94,.45)}
+  .r.ariesg{border-color:rgba(244,63,94,.4)}
+  .r h3{font-size:16px;margin-bottom:6px}
+  .r p{color:var(--dim);font-size:13.5px;line-height:1.7}
+  .pdf{text-align:center;padding:46px 28px;border-radius:18px;border:1px solid rgba(168,85,247,.4);
+    background:linear-gradient(160deg,var(--panel),var(--panel2))}
+  .pdf .ig{font-size:42px;margin-bottom:10px}
+  .pdf p{color:var(--dim);font-size:13.5px;margin-bottom:22px;line-height:1.7}
+  .bp{display:inline-block;text-decoration:none;color:#fff;font-weight:700;padding:14px 42px;border-radius:10px;letter-spacing:1px;
+    background:linear-gradient(135deg,var(--purple2),var(--purple));box-shadow:0 0 18px rgba(168,85,247,.5);transition:.25s}
+  .bp:hover{transform:translateY(-2px);box-shadow:0 0 34px rgba(168,85,247,.85)}
+  .ceo{text-align:center;padding:38px;border-radius:18px;border:1px solid rgba(168,85,247,.32);
+    background:radial-gradient(circle at 50% 0%,rgba(124,58,237,.18),var(--panel) 72%)}
+  .cn{font-size:30px;font-weight:800;letter-spacing:8px;color:#fff;text-shadow:0 0 18px var(--purple)}
+  .cr{color:var(--neon);letter-spacing:4px;font-size:12px;margin-top:8px}
+  .cnv{color:var(--dim);font-size:13px;margin-top:16px;line-height:1.7}
+  footer{text-align:center;padding:30px;border-top:1px solid rgba(168,85,247,.18);color:#6d5a91;font-size:11px;letter-spacing:2px}
+  ::selection{background:var(--purple);color:#fff}
+</style>
+</head>
+<body>
+<div class="glow g1"></div><div class="glow g2"></div>
+
+<!-- CONTEÚDO -->
+<div class="tudo" id="tudo">
+  <nav>
+    <div class="logo"><span class="lc">👑</span><div class="lt">GAMER<small>Z O N E</small></div></div>
+    <div style="display:flex;gap:22px"><a href="#reg" style="color:var(--dim);text-decoration:none;font-size:12px;letter-spacing:1px">REGULAMENTO</a>
+    <a href="#doc" style="color:var(--dim);text-decoration:none;font-size:12px;letter-spacing:1px">DOCUMENTO</a></div>
+  </nav>
+  <div class="saud" id="saud">👤 ACESSO LIBERADO</div>
+
+  <header>
+    <span class="bdg">COMUNIDADE COMPETITIVA · PRÓ-JOGADOR</span>
+    <div class="hero">GAMER ZONE</div>
+    <p class="hsu">Um ambiente reconstruído para quem leva o jogo a sério: respeito absoluto, conduta responsável e nenhuma tolerância a violações.<br>O regulamento abaixo é de adesão integral, obrigatória para permanecer na comunidade.</p>
+  </header>
+
+  <section id="reg">
+    <div class="sh"><div class="stag">REGULAMENTO INTERNO</div><h2>Condicional de Conduta</h2>
+    <p>Aplicável a canais de texto, áudio e ambientes vinculados à comunidade. Punições são aplicadas conforme a gravidade da infração.</p></div>
+    <div class="div"></div>
+    <div class="r ariesg"><div class="rn">1</div><div><h3>Discriminação — Banimento permanente</h3>
+      <p>Racismo, homofobia, xenofobia, preconceito religioso, sexismo ou qualquer forma de discriminação resultam em remoção imediata e definitiva, sem aviso prévio.</p></div></div>
+    <div class="r ariesg"><div class="rn">2</div><div><h3>Infrações criminais — Repasse às autoridades</h3>
+      <p>A divulgação ou promoção de conteúdo relacionado a crimes — incluindo qualquer forma de exploração de menores — é estritamente proibida. Nessas situações, será lavrado <b>boletim de ocorrência</b> e os dados relevantes serão <b>entregues às autoridades competentes</b>.</p></div></div>
+    <div class="r"><div class="rn">3</div><div><h3>Proteção de dados</h3>
+      <p>Registros de presença e de conduta permanecem <b>reservados</b>. Serão utilizados exclusivamente em situações de extrema gravidade, conforme a condição anterior. Jamais compartilhados em outros contextos.</p></div></div>
+    <div class="r"><div class="rn">4</div><div><h3>Postura e respeito</h3>
+      <p>Conduta tóxica — ofensas, assédio, guerras pessoais — não é aceita em nenhum ambiente da comunidade. Divergências se resolvem através da moderação, nunca na provocação.</p></div></div>
+    <div class="r"><div class="rn">5</div><div><h3>Integridade do ambiente</h3>
+      <p>Spam, flood, divulgação não autorizada e atos de sabotagem são monitorados continuamente pelo sistema de segurança do servidor e respondidos com medidas graduais proporcionalmente.</p></div></div>
+    <div class="r"><div class="rn">6</div><div><h3>Identidade apropriada</h3>
+      <p>Perfis com nomes ofensivos, avatares impróprios ou que violem o padrão de conduta serão solicitados à correção pela moderação.</p></div></div>
+    <div class="r"><div class="rn">7</div><div><h3>Aderência à estrutura</h3>
+      <p>Registros de partidas, relatórios de falhas e destaques possuem espaço próprio. A organização de cada canal preserva a qualidade para toda a comunidade.</p></div></div>
+  </section>
+
+  <section id="doc">
+    <div class="pdf">
+      <div class="ig">📥</div>
+      <h2 style="margin-bottom:10px">DOC — REGULAMENTO COMPLETO</h2>
+      <p>Versão em documento oficial, com todas as cláusulas descritas neste portal.</p>
+      <a class="bp" href="regulamento.pdf" download>⬇️ OBTER DOCUMENTO (.PDF)</a>
+    </div>
+  </section>
+
+  <section>
+    <div class="ceo">
+      <div class="stag">DIREÇÃO</div>
+      <div class="cn">V E X</div>
+      <div class="cr">CEO &amp; ADMINISTRADOR-GERAL</div>
+      <p class="cnv">Situações que exijam deliberação: contate a prova de Administração responsável diretamente.<br>A supervisão sobre a comunidade é permanente.</p>
+    </div>
+  </section>
+
+  <footer>© GAMER ZONE · REGULAMENTO OFICIAL · TODOS OS DIREITOS RESERVADOS</footer>
+</div>
+
+<script>
+  const P = new URLSearchParams(location.search);
+  const nick = P.get('n');
+  document.getElementById('saud').textContent = nick
+    ? '👤 OLÁ, ' + decodeURIComponent(nick).toUpperCase() + ' — CONHEÇA O REGULAMENTO'
+    : '👤 REGULAMENTO OFICIAL · GAMER ZONE';
+</script>
+</body>
+</html>
